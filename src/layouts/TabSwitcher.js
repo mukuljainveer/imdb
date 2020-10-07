@@ -1,78 +1,111 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box p={3}>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
-        </div>
-    );
-}
-
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-    return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
-    };
-}
+import React from "react";
+import { Tab, Nav } from 'react-bootstrap'
+import TvSeries from "../pages/TvSeries";
+import Box from "@material-ui/core/Box";
+import PopularTvSeries from "../pages/PopularTvSeries";
+import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import NativeSelect from "@material-ui/core/NativeSelect";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
+    formControl: {
+        minWidth:120
     },
+    rootLabel:{
+        top:-7
+    },
+    tabContentContainer:{
+        position: 'absolute',
+        margin: '10px',
+        top: '42px',
+        width: '90%',
+    }
 }));
 
-export default function Tab() {
+const TabSwitcher = () => {
     const classes = useStyles();
-    const [value, setValue] = React.useState(0);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
+    const selectBoxStyle = {
+        background: 'transparent',
+        padding: '6px',
+        width: '110px'
+    }
+
+    const [state, setState] = React.useState({
+        age: "",
+        name: "hai"
+    });
+
+    const handleChange = (event) => {
+        const name = event.target.name;
+        setState({
+            ...state,
+            [name]: event.target.value
+        });
     };
 
     return (
-        <div className={classes.root}>
-            <AppBar position="static">
-                <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                    <Tab label="Item One" {...a11yProps(0)} />
-                    <Tab label="Item Two" {...a11yProps(1)} />
-                    <Tab label="Item Three" {...a11yProps(2)} />
-                </Tabs>
-            </AppBar>
-            <TabPanel value={value} index={0}>
-                Item One
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                Item Two
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                Item Three
-            </TabPanel>
-        </div>
-    );
+        <>
+            <Box display="flex" flexDirection="row" justifyContent='space-between'>
+                <Box>
+                    <Tab.Container id="left-tabs-example" defaultActiveKey="first" >
+                        <Nav variant="pills" className="flex-row">
+                            <Nav.Item>
+                                <Nav.Link eventKey="first">My Series</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link eventKey="second">Popular</Nav.Link>
+                            </Nav.Item>
+                        </Nav>
+                        <Tab.Content className={classes.tabContentContainer}>
+                            <Tab.Pane eventKey="first">
+                                <TvSeries />
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="second">
+                                <PopularTvSeries />
+                            </Tab.Pane>
+                        </Tab.Content>
+                    </Tab.Container>
+                </Box>
+                <Box>
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel className={classes.rootLabel}  htmlFor="outlined-age-native-simple">Rating</InputLabel>
+                        <Select
+                            native
+                            value={state.rating}
+                            onChange={handleChange}
+                            label="Rating"
+                            inputProps={{
+                                style:{
+                                    width: '166px',
+                                    padding: '11px',
+                                },
+                                name: "Rating",
+                                id: "outlined-age-native-simple"
+                            }}
+                        >
+                            <option aria-label="None" value="" />
+                            <option>Alphabet (a-z)</option>
+                            <option>Alphabet (z-a)</option>
+                            <option>Rating (low to high)</option>
+                            <option>Rating (high to low)</option>
+                        </Select>
+                    </FormControl>
+
+                    {/* <select style={selectBoxStyle} value="Rating">
+                       <option disabled>Rating</option>
+                       <option>Alphabet (a-z)</option>
+                       <option>Alphabet (z-a)</option>
+                       <option>Rating (low to high)</option>
+                       <option>Rating (high to low)</option>
+                   </select> */}
+                </Box>
+            </Box>
+        </>
+    )
 }
+
+export default TabSwitcher;
