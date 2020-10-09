@@ -1,18 +1,11 @@
 import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+const Movies = () => {
+  return (
+    <>
+      <h1>Movies COMPONENT</h1>
+    </>
+  );
+};
 
-}));
-
-const Movies=()=>{
-    const classes = useStyles();
-
-    return (
-        <>
-            <h1>Movies COMPONENT</h1>
-        </>
-    )
-}
-
-export default Movies
+export default Movies;

@@ -7,13 +7,10 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import TvSeries from "./pages/TvSeries";
 import Movies from "./pages/Movies";
 import TabSwitcher from "./layouts/TabSwitcher";
-import {Tab} from "react-bootstrap";
 
 function App() {
   return (

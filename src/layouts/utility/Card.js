@@ -1,12 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import http from "../../http";
-import { render } from "react-dom";
 import { pure } from "recompose";
 import { useSelector } from "react-redux";
 import store from "./../../store/";
@@ -42,10 +40,10 @@ const SimpleCard = function SimpleCard(props) {
 
   useEffect(() => {
     setDetailVisible(activeSeries);
-  });
+  },[setDetailVisible,activeSeries]);
 
   const CustomCard = (props) => {
-    return props.DetailVisible == props.cardData.Title ? (
+    return props.DetailVisible === props.cardData.Title ? (
       <Card
         onClick={() => cardDetailsHandler(props.cardData.Title)}
         style={{ backgroundColor: "#f3bc2e", color: "white" }}
@@ -75,6 +73,7 @@ const SimpleCard = function SimpleCard(props) {
                 </Box>
                 <Box style={{ border: "4px solid white" }}>
                   <img
+                    alt={props.cardData.Title}
                     src={props.cardData.Poster}
                     width="200px"
                     height="250px"
@@ -96,6 +95,7 @@ const SimpleCard = function SimpleCard(props) {
               <Box flexWrap="wrap" display="flex" flexDirection="column">
                 <Box style={{ border: "4px solid #f3bc2e" }}>
                   <img
+                    alt={props.cardData.Title}
                     src={props.cardData.Poster}
                     width="150px"
                     height="200px"
@@ -120,7 +120,7 @@ const SimpleCard = function SimpleCard(props) {
       setCardData(res);
       setLoading(true);
     });
-  }, []);
+  }, [props.name]);
 
   return (
     <>

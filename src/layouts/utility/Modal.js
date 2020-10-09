@@ -13,9 +13,6 @@ export default function Modal() {
     const isSearchEnable=useSelector(state=>state.NavReducer.searchEnable)
     const [open, setOpen] = React.useState(isSearchEnable);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
 
     const handleClose = () => {
         store.dispatch(searchable())
@@ -23,7 +20,7 @@ export default function Modal() {
 
     useEffect(()=>{
         setOpen(isSearchEnable)
-    })
+    },[setOpen,isSearchEnable])
 
     return (
         <div>

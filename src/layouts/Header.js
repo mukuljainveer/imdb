@@ -6,13 +6,9 @@ import { BiLogOut } from "react-icons/bi";
 import Icon from "./utility/Icon";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import { Grid, Box } from "@material-ui/core/";
 import store from "../store";
 import { searchable, setNavigation } from "../store/actions/HeaderActions";
-import Modal from "./utility/Modal";
-import TabSwitcher from "./TabSwitcher";
-import AppBar from "../layouts/AppBar";
 
 const Header = (props) => {
   const [navSelected, setNavSelected] = useState(props.navigate);
@@ -82,9 +78,9 @@ const Header = (props) => {
                     </div>
                 </Box>
                 <Box>
-                    <a onClick={searchEnable} className="btn search-btn">
+                    <span onClick={searchEnable} className="btn search-btn">
                         <BsSearch />
-                    </a>
+                    </span>
                 </Box>
               </Box>
             {/* <div className="col-md-4" align="right">

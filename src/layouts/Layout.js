@@ -1,28 +1,22 @@
-import React, {Component, useState} from "react";
+import React, { Component } from "react";
 import Header from "./Header";
-import {connect, useSelector} from "react-redux";
-import TabSwitcher from "./TabSwitcher";
+import { connect } from "react-redux";
 
-
-class Layout extends Component{
-
-
-    render(){
-        return(
-            <>
-                <Header navigate={this.props.navigation}/>
-                <div className="contentContainer">
-                    {this.props.children}
-                </div>
-            </>
-        );
-    }
+class Layout extends Component {
+  render() {
+    return (
+      <>
+        <Header navigate={this.props.navigation} />
+        <div className="contentContainer">{this.props.children}</div>
+      </>
+    );
+  }
 }
 
-const mapStatetoProps=(state)=>{
-    return {
-        navigation:state.NavReducer.currentNav
-    }
-}
+const mapStatetoProps = (state) => {
+  return {
+    navigation: state.NavReducer.currentNav,
+  };
+};
 
 export default connect(mapStatetoProps)(Layout);

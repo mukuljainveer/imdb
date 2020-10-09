@@ -10,7 +10,6 @@ function TvSeriesName(state=initalState,action) {
                 ...state,
                 tvSeiesName:action.data
             }
-            break;
         default:
             return state
     }

@@ -1,20 +1,8 @@
-import React, {useEffect, useRef, useState} from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import React, { useState} from "react";
 import Card from "../layouts/utility/Card";
-import RatingCard from "../layouts/utility/RatingCard";
 import Box from "@material-ui/core/Box";
 import Ratings from "../layouts/Ratings";
 
-const useStyles = makeStyles((theme) => ({
-    root:{
-        padding: '0px',
-        margin: '18px 0px'
-    },
-    ratingSection:{
-        marginTop:'60px'
-    }
-}));
 
 const TvSeries=()=>{
 
@@ -24,7 +12,7 @@ const TvSeries=()=>{
         setSeasons(totalSeasons)
     }
 
-    const [tvSeries,setTvSeries]=useState([
+    const [tvSeries]=useState([
         {
             name:'Game of Thrones',
             type:'series'
@@ -59,8 +47,7 @@ const TvSeries=()=>{
         // },
         ]);
 
-    const classes = useStyles();
-
+ 
     return (
         <>
 
@@ -73,7 +60,7 @@ const TvSeries=()=>{
                     >
                     {tvSeries.map((series, index) => (
                         <Box p={1} key={index}>
-                            <Card setTvSeriesSesions={setTvSeriesSesions} isDetailVisible={index == 0 ? true : false} name={series.name}/>
+                            <Card setTvSeriesSesions={setTvSeriesSesions} isDetailVisible={index === 0 ? true : false} name={series.name}/>
                         </Box>
                     ))}
                     </Box>

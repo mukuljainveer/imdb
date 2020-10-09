@@ -10,14 +10,13 @@ function NavReducer(state=initalState,action) {
                 ...state,
                 searchEnable: !state.searchEnable
             }
-            break
-
+           
         case 'NAVIGATE':
             return {
                 ...state,
                 currentNav: action.data
             }
-            break
+           
         default:
             return state
     }
